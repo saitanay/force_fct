@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Module file for the form cache control module
+ */
+
+/**
+ * Remove a given number of expired entries from cache_form
+ *
+ * @return integer
+ *  The number of rows deleted from the cache_form table.
+ */
+function _force_fct_delete($limit) {
+  //Should ideally use placeholders for variables as suggested on https://www.drupal.org/writing-secure-code
+  //But considering the limitation with passing LIMIT when placeholders are used, not using it
+  db_query("DELETE FROM {cache_form} where expire <> " . CACHE_PERMANENT . " AND expire < " . time() . " ORDER BY expire LIMIT " . $limit);
+}
