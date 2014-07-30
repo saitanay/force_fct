@@ -14,5 +14,5 @@
 function _force_fct_delete($limit) {
   //Should ideally use placeholders for variables as suggested on https://www.drupal.org/writing-secure-code
   //But considering the limitation with passing LIMIT when placeholders are used, not using it
-  db_query("DELETE FROM {cache_form} where expire <> " . CACHE_PERMANENT . " AND expire < " . time() . " ORDER BY expire LIMIT " . $limit);
+  db_query("DELETE FROM {cache_form} where expire <> " . CACHE_PERMANENT . " AND expire < " . time() . " ORDER BY expire DESC LIMIT " . $limit);
 }
