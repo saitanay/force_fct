@@ -43,3 +43,17 @@ function force_fct_drush_command() {
 function drush_force_fct_ffct($limit = FORCE_FCT_DEFAULT_LIMIT ) {
   _force_fct_delete($limit);
 }
+
+/**
+ * Remove a given number of expired entries from cache_form
+ *
+ * @return integer
+ *  The number of rows deleted from the cache_form table.
+ */
+function _force_fct_delete($limit) {
+  // Should ideally use placeholders for variables as suggested on https://www.drupal.org/writing-secure-code
+  // But drupal db_delete does not support range or orderBy
+  if (ctype_digit($limit) && $limit > 1) {    
+    db_query("DELETE FROM {cache_form} where expire <> " . CACHE_PERMANENT . " AND expire < " . time() . " ORDER BY expire DESC LIMIT " . $limit);
+  }
+}
