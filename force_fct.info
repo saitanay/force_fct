@@ -1,3 +1,5 @@
 name = "Force Form Cache Trimming [Drush Command]"
 description = "Provides a drush command to trim specific number of expired items on cache_form table"
 core = "7.x"
+package = Development
+hidden = TRUE
